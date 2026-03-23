@@ -4,866 +4,745 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlogSphere — INF222</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --blue-deep: #0a2540;
-            --blue-mid: #1a56db;
-            --blue-light: #e8f0fe;
-            --blue-accent: #3b82f6;
+            --blue: #1a56db;
+            --blue-dark: #0a2540;
+            --blue-light: #eff6ff;
             --white: #ffffff;
-            --grey-soft: #f8fafc;
-            --grey-border: #e2e8f0;
-            --grey-text: #64748b;
+            --bg: #f4f7fb;
+            --border: #dde5f0;
+            --text-muted: #6b7a99;
             --success: #10b981;
             --danger: #ef4444;
-            --shadow-sm: 0 1px 3px rgba(10,37,64,0.08), 0 1px 2px rgba(10,37,64,0.04);
-            --shadow-md: 0 4px 16px rgba(10,37,64,0.10), 0 2px 6px rgba(10,37,64,0.06);
-            --shadow-lg: 0 20px 40px rgba(10,37,64,0.12);
-            --radius: 16px;
-            --radius-sm: 10px;
+            --radius: 14px;
+            --shadow: 0 2px 12px rgba(10,37,64,0.08);
+            --shadow-hover: 0 8px 28px rgba(10,37,64,0.13);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--grey-soft);
-            color: var(--blue-deep);
-            min-height: 100vh;
+            font-family: 'Sora', sans-serif;
+            background: var(--bg);
+            color: var(--blue-dark);
         }
 
-        /* ── NAV ── */
+        /* ── NAVBAR ── */
         nav {
             background: var(--white);
-            border-bottom: 1px solid var(--grey-border);
-            padding: 0 40px;
-            height: 64px;
+            border-bottom: 1px solid var(--border);
+            height: 60px;
+            padding: 0 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow-sm);
+            z-index: 50;
+            box-shadow: var(--shadow);
         }
 
-        .nav-brand {
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--blue-dark);
+        }
+
+        .brand-dot {
+            width: 10px; height: 10px;
+            background: var(--blue);
+            border-radius: 50%;
+        }
+
+        .brand span { color: var(--blue); }
+
+        .nav-right {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .nav-logo {
-            width: 36px;
-            height: 36px;
-            background: var(--blue-mid);
-            border-radius: 10px;
+        .search-box {
             display: flex;
             align-items: center;
-            justify-content: center;
-        }
-
-        .nav-logo svg { color: white; }
-
-        .nav-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.4rem;
-            color: var(--blue-deep);
-            letter-spacing: -0.02em;
-        }
-
-        .nav-title span { color: var(--blue-mid); }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .search-wrap {
-            position: relative;
-        }
-
-        .search-wrap svg {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--grey-text);
-            width: 16px;
-            height: 16px;
-        }
-
-        #searchBox {
-            padding: 9px 16px 9px 40px;
-            border: 1.5px solid var(--grey-border);
+            gap: 8px;
+            background: var(--bg);
+            border: 1.5px solid var(--border);
             border-radius: 50px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.875rem;
-            background: var(--grey-soft);
-            color: var(--blue-deep);
-            width: 260px;
-            outline: none;
-            transition: all 0.2s;
+            padding: 7px 16px;
+            transition: 0.2s;
         }
 
-        #searchBox:focus {
-            border-color: var(--blue-accent);
+        .search-box:focus-within {
+            border-color: var(--blue);
             background: var(--white);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
         }
 
-        .badge-count {
+        .search-box svg { color: var(--text-muted); flex-shrink: 0; }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.85rem;
+            color: var(--blue-dark);
+            width: 220px;
+        }
+
+        .pill {
             background: var(--blue-light);
-            color: var(--blue-mid);
+            color: var(--blue);
             font-size: 0.75rem;
             font-weight: 600;
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 50px;
         }
 
         /* ── HERO ── */
         .hero {
-            background: linear-gradient(135deg, var(--blue-deep) 0%, #1e3a5f 60%, #1a56db 100%);
-            padding: 60px 40px;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(120deg, var(--blue-dark) 0%, #1e4080 50%, var(--blue) 100%);
+            padding: 48px 32px;
+            color: white;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -80px; right: -80px;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -60px; left: 20%;
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(26,86,219,0.2) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .hero-content {
-            max-width: 1200px;
+        .hero-inner {
+            max-width: 1100px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.85);
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 5px 14px;
-            border-radius: 50px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(8px);
-        }
-
-        .hero h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            color: var(--white);
-            line-height: 1.15;
-            letter-spacing: -0.02em;
+        .hero-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
             margin-bottom: 12px;
         }
 
-        .hero h1 em {
-            font-style: italic;
-            color: #93c5fd;
+        .hero h1 {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 8px;
         }
 
+        .hero h1 span { color: #93c5fd; }
+
         .hero p {
-            color: rgba(255,255,255,0.65);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 300;
+            color: rgba(255,255,255,0.6);
         }
 
         /* ── LAYOUT ── */
-        .main-layout {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 40px;
+        .layout {
+            max-width: 1100px;
+            margin: 36px auto;
+            padding: 0 32px;
             display: grid;
-            grid-template-columns: 360px 1fr;
-            gap: 32px;
+            grid-template-columns: 320px 1fr;
+            gap: 28px;
             align-items: start;
         }
 
-        /* ── FORM CARD ── */
+        /* ── FORM ── */
         .form-card {
             background: var(--white);
+            border: 1px solid var(--border);
             border-radius: var(--radius);
-            border: 1px solid var(--grey-border);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
+            box-shadow: var(--shadow);
             position: sticky;
-            top: 84px;
+            top: 76px;
+            overflow: hidden;
         }
 
-        .form-header {
-            padding: 24px 28px 20px;
-            border-bottom: 1px solid var(--grey-border);
+        .form-top {
+            padding: 20px 22px 16px;
+            border-bottom: 1px solid var(--border);
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
 
-        .form-header h2 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.25rem;
-            color: var(--blue-deep);
+        .form-top h2 {
+            font-size: 1rem;
+            font-weight: 700;
         }
 
-        .form-mode-badge {
-            font-size: 0.7rem;
-            font-weight: 600;
+        .mode-tag {
+            font-size: 0.68rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.06em;
             padding: 3px 10px;
             border-radius: 50px;
             background: var(--blue-light);
-            color: var(--blue-mid);
+            color: var(--blue);
         }
 
-        .form-mode-badge.edit { background: #fef3c7; color: #d97706; }
+        .mode-tag.edit { background: #fef9c3; color: #ca8a04; }
 
-        .form-body { padding: 24px 28px; }
+        .form-body { padding: 18px 22px; }
 
-        .field-group { margin-bottom: 16px; }
+        .field { margin-bottom: 14px; }
 
-        .field-group label {
+        .field label {
             display: block;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             font-weight: 600;
-            color: var(--blue-deep);
-            margin-bottom: 6px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            margin-bottom: 5px;
         }
 
-        .field-group input,
-        .field-group textarea {
+        .field input,
+        .field textarea {
             width: 100%;
-            padding: 11px 14px;
-            border: 1.5px solid var(--grey-border);
-            border-radius: var(--radius-sm);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            color: var(--blue-deep);
-            background: var(--grey-soft);
+            padding: 10px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.875rem;
+            color: var(--blue-dark);
+            background: var(--bg);
             outline: none;
-            transition: all 0.2s;
+            transition: 0.2s;
             resize: none;
         }
 
-        .field-group input:focus,
-        .field-group textarea:focus {
-            border-color: var(--blue-accent);
+        .field input:focus,
+        .field textarea:focus {
+            border-color: var(--blue);
             background: var(--white);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
         }
 
-        .field-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-        .btn-primary {
+        .btn {
             width: 100%;
-            padding: 13px;
-            background: var(--blue-mid);
-            color: var(--white);
+            padding: 11px;
             border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
+            border-radius: 8px;
+            font-family: 'Sora', sans-serif;
+            font-size: 0.875rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn-blue {
+            background: var(--blue);
+            color: white;
             margin-top: 4px;
         }
 
-        .btn-primary:hover { background: #1645c0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,86,219,0.3); }
-        .btn-primary:active { transform: translateY(0); }
+        .btn-blue:hover { background: #1440b8; transform: translateY(-1px); }
 
-        .btn-secondary {
-            width: 100%;
-            padding: 11px;
+        .btn-ghost {
             background: transparent;
-            color: var(--grey-text);
-            border: 1.5px solid var(--grey-border);
-            border-radius: var(--radius-sm);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
+            color: var(--text-muted);
+            border: 1.5px solid var(--border);
             margin-top: 8px;
             display: none;
         }
 
-        .btn-secondary:hover { border-color: var(--danger); color: var(--danger); }
+        .btn-ghost:hover { border-color: var(--danger); color: var(--danger); }
 
-        /* ── ARTICLES SECTION ── */
-        .articles-section {}
-
-        .section-header {
+        /* ── ARTICLES ── */
+        .articles-head {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            align-items: center;
+            margin-bottom: 18px;
         }
 
-        .section-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.5rem;
-            color: var(--blue-deep);
+        .articles-head h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
         }
 
-        .filter-bar {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
+        .filters { display: flex; gap: 6px; flex-wrap: wrap; }
 
         .filter-btn {
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            border: 1.5px solid var(--grey-border);
+            font-family: 'Sora', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1.5px solid var(--border);
             background: var(--white);
-            color: var(--grey-text);
+            color: var(--text-muted);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: 0.2s;
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background: var(--blue-mid);
-            border-color: var(--blue-mid);
-            color: var(--white);
+            background: var(--blue);
+            border-color: var(--blue);
+            color: white;
         }
 
-        .articles-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
         }
 
-        /* ── ARTICLE CARD ── */
-        .article-card {
+        /* ── CARD ── */
+        .card {
             background: var(--white);
+            border: 1px solid var(--border);
             border-radius: var(--radius);
-            border: 1px solid var(--grey-border);
-            box-shadow: var(--shadow-sm);
-            overflow: hidden;
-            transition: all 0.25s;
+            box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
-            animation: fadeUp 0.4s ease both;
+            transition: 0.25s;
+            animation: up 0.35s ease both;
+            overflow: hidden;
         }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes up {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .article-card:hover {
-            box-shadow: var(--shadow-lg);
+        .card:hover {
+            box-shadow: var(--shadow-hover);
             transform: translateY(-3px);
-            border-color: #c7d7fc;
+            border-color: #bfcfee;
         }
 
-        .card-top {
-            padding: 20px 20px 0;
+        .card-head {
+            padding: 16px 16px 0;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
         }
 
-        .cat-badge {
-            font-size: 0.7rem;
+        .cat {
+            font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 4px 12px;
+            letter-spacing: 0.07em;
+            padding: 3px 10px;
             border-radius: 50px;
             background: var(--blue-light);
-            color: var(--blue-mid);
+            color: var(--blue);
         }
 
-        .card-actions {
+        .card-btns {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: 0.2s;
         }
 
-        .article-card:hover .card-actions { opacity: 1; }
+        .card:hover .card-btns { opacity: 1; }
 
-        .action-btn {
-            width: 32px; height: 32px;
-            border-radius: 8px;
-            border: 1.5px solid var(--grey-border);
+        .icon-btn {
+            width: 28px; height: 28px;
+            border-radius: 7px;
+            border: 1.5px solid var(--border);
             background: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s;
-            color: var(--grey-text);
+            color: var(--text-muted);
+            transition: 0.2s;
         }
 
-        .action-btn:hover.edit { border-color: var(--blue-accent); color: var(--blue-accent); background: var(--blue-light); }
-        .action-btn:hover.delete { border-color: var(--danger); color: var(--danger); background: #fef2f2; }
+        .icon-btn.edit:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+        .icon-btn.del:hover  { border-color: var(--danger); color: var(--danger); background: #fef2f2; }
 
-        .card-body { padding: 14px 20px; flex: 1; }
+        .card-body { padding: 12px 16px; flex: 1; }
 
         .card-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.1rem;
-            color: var(--blue-deep);
-            line-height: 1.35;
-            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 6px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .card-excerpt {
-            font-size: 0.85rem;
-            color: var(--grey-text);
+        .card-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
             line-height: 1.6;
+            font-weight: 300;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .card-footer {
-            padding: 14px 20px;
-            border-top: 1px solid var(--grey-border);
+        .card-tags {
+            padding: 0 16px 12px;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            background: var(--bg);
+            color: var(--text-muted);
+            padding: 2px 8px;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+        }
+
+        .card-foot {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .card-author {
+        .author {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
         }
 
-        .author-avatar {
-            width: 28px; height: 28px;
+        .avatar {
+            width: 26px; height: 26px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue-mid), #60a5fa);
+            background: linear-gradient(135deg, var(--blue), #60a5fa);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             color: white;
         }
 
-        .author-name {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--blue-deep);
-        }
+        .author-name { font-size: 0.78rem; font-weight: 600; }
+        .date { font-size: 0.72rem; color: var(--text-muted); }
 
-        .card-date {
-            font-size: 0.75rem;
-            color: var(--grey-text);
-        }
-
-        .tags-row {
-            padding: 0 20px 16px;
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .tag-chip {
-            font-size: 0.7rem;
-            background: var(--grey-soft);
-            color: var(--grey-text);
-            padding: 3px 10px;
-            border-radius: 50px;
-            border: 1px solid var(--grey-border);
-        }
-
-        /* ── EMPTY STATE ── */
-        .empty-state {
-            grid-column: 1 / -1;
+        /* ── EMPTY ── */
+        .empty {
+            grid-column: 1/-1;
             text-align: center;
             padding: 60px 20px;
-            color: var(--grey-text);
+            color: var(--text-muted);
         }
 
         .empty-icon {
-            width: 64px; height: 64px;
+            width: 56px; height: 56px;
             background: var(--blue-light);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 16px;
-            color: var(--blue-mid);
+            margin: 0 auto 14px;
+            color: var(--blue);
         }
 
-        .empty-state h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.2rem;
-            color: var(--blue-deep);
-            margin-bottom: 6px;
-        }
+        .empty h3 { font-size: 1rem; color: var(--blue-dark); margin-bottom: 4px; }
+        .empty p  { font-size: 0.85rem; font-weight: 300; }
 
         /* ── TOAST ── */
         #toast {
             position: fixed;
-            bottom: 32px; right: 32px;
-            padding: 14px 20px;
-            border-radius: var(--radius-sm);
-            font-size: 0.875rem;
-            font-weight: 500;
+            bottom: 24px; right: 24px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
             color: white;
-            box-shadow: var(--shadow-lg);
             z-index: 999;
             display: none;
-            align-items: center;
-            gap: 10px;
             animation: slideIn 0.3s ease;
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
+            from { opacity: 0; transform: translateX(16px); }
+            to   { opacity: 1; transform: translateX(0); }
         }
 
-        #toast.success { background: var(--success); display: flex; }
-        #toast.error { background: var(--danger); display: flex; }
+        #toast.ok  { background: var(--success); display: block; }
+        #toast.err { background: var(--danger);  display: block; }
 
         /* ── LOADER ── */
-        .loader {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        .spinner {
-            width: 36px; height: 36px;
-            border: 3px solid var(--grey-border);
-            border-top-color: var(--blue-mid);
+        .loader { grid-column: 1/-1; display: flex; justify-content: center; padding: 48px; }
+        .spin {
+            width: 32px; height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--blue);
             border-radius: 50%;
             animation: spin 0.7s linear infinite;
         }
-
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        @media (max-width: 900px) {
-            .main-layout { grid-template-columns: 1fr; padding: 24px 20px; }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; padding: 0 16px; margin: 20px auto; }
             .form-card { position: static; }
-            nav { padding: 0 20px; }
-            #searchBox { width: 180px; }
-            .hero { padding: 40px 20px; }
+            nav { padding: 0 16px; }
+            .search-box input { width: 150px; }
+            .hero { padding: 36px 16px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAV -->
-    <nav>
-        <div class="nav-brand">
-            <div class="nav-logo">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                </svg>
-            </div>
-            <span class="nav-title">Blog<span>Sphere</span></span>
+<nav>
+    <div class="brand">
+        <div class="brand-dot"></div>
+        Blog<span>Sphere</span>
+    </div>
+    <div class="nav-right">
+        <div class="search-box">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input type="text" id="searchBox" placeholder="Rechercher..." oninput="recherche()">
         </div>
-        <div class="nav-right">
-            <div class="search-wrap">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
-                <input type="text" id="searchBox" placeholder="Rechercher un article..." oninput="recherche()">
-            </div>
-            <span class="badge-count" id="countBadge">0 article</span>
-        </div>
-    </nav>
+        <span class="pill" id="countBadge">0 article</span>
+    </div>
+</nav>
 
-    <!-- HERO -->
-    <div class="hero">
-        <div class="hero-content">
-            <div class="hero-tag">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
-                INF222 · EC1 · Projet Backend
+<div class="hero">
+    <div class="hero-inner">
+        <p class="hero-label">INF222 · EC1 · Projet Backend</p>
+        <h1>Gérez vos articles<br><span>avec simplicité.</span></h1>
+        <p>Créez, modifiez et organisez vos publications en temps réel.</p>
+    </div>
+</div>
+
+<div class="layout">
+
+    <!-- FORMULAIRE -->
+    <div class="form-card">
+        <div class="form-top">
+            <h2 id="formTitle">Nouvel Article</h2>
+            <span class="mode-tag" id="formBadge">Création</span>
+        </div>
+        <div class="form-body">
+            <input type="hidden" id="articleId">
+
+            <div class="field">
+                <label>Titre *</label>
+                <input type="text" id="titre" placeholder="Un titre accrocheur...">
             </div>
-            <h1>Gérez vos articles<br><em>avec élégance.</em></h1>
-            <p>Créez, modifiez et organisez vos publications en temps réel.</p>
+
+            <div class="field">
+                <label>Auteur *</label>
+                <input type="text" id="auteur" placeholder="Votre nom">
+            </div>
+
+            <div class="two-col">
+                <div class="field">
+                    <label>Catégorie</label>
+                    <input type="text" id="cat" placeholder="ex: Tech">
+                </div>
+                <div class="field">
+                    <label>Tags</label>
+                    <input type="text" id="tags" placeholder="node,api">
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Contenu *</label>
+                <textarea id="contenu" rows="5" placeholder="Rédigez votre article..."></textarea>
+            </div>
+
+            <button class="btn btn-blue" onclick="publier()">
+                <span id="submitLabel">Publier l'article</span>
+            </button>
+            <button class="btn btn-ghost" onclick="annuler()" id="cancelBtn">Annuler</button>
         </div>
     </div>
 
-    <!-- MAIN -->
-    <div class="main-layout">
-
-        <!-- FORM -->
-        <div class="form-card">
-            <div class="form-header">
-                <h2 id="formTitle">Nouvel Article</h2>
-                <span class="form-mode-badge" id="formBadge">Création</span>
-            </div>
-            <div class="form-body">
-                <input type="hidden" id="articleId">
-
-                <div class="field-group">
-                    <label>Titre *</label>
-                    <input type="text" id="titre" placeholder="Donnez un titre accrocheur...">
-                </div>
-
-                <div class="field-group">
-                    <label>Auteur *</label>
-                    <input type="text" id="auteur" placeholder="Votre nom complet">
-                </div>
-
-                <div class="field-row">
-                    <div class="field-group">
-                        <label>Catégorie</label>
-                        <input type="text" id="cat" placeholder="ex: Tech">
-                    </div>
-                    <div class="field-group">
-                        <label>Tags</label>
-                        <input type="text" id="tags" placeholder="node,api,...">
-                    </div>
-                </div>
-
-                <div class="field-group">
-                    <label>Contenu *</label>
-                    <textarea id="contenu" rows="5" placeholder="Rédigez votre article ici..."></textarea>
-                </div>
-
-                <button class="btn-primary" onclick="publier()" id="submitBtn">
-                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-                    </svg>
-                    <span id="submitLabel">Publier l'article</span>
-                </button>
-                <button class="btn-secondary" onclick="annuler()" id="cancelBtn">Annuler la modification</button>
-            </div>
+    <!-- ARTICLES -->
+    <div>
+        <div class="articles-head">
+            <h2>Publications</h2>
+            <div class="filters" id="filterBar"></div>
         </div>
-
-        <!-- ARTICLES -->
-        <div class="articles-section">
-            <div class="section-header">
-                <h2 class="section-title">Publications</h2>
-                <div class="filter-bar" id="filterBar"></div>
-            </div>
-            <div class="articles-grid" id="articlesList">
-                <div class="loader"><div class="spinner"></div></div>
-            </div>
+        <div class="grid" id="articlesList">
+            <div class="loader"><div class="spin"></div></div>
         </div>
     </div>
+</div>
 
-    <!-- TOAST -->
-    <div id="toast"></div>
+<div id="toast"></div>
 
-    <script>
-        const API = "http://localhost:3000/api/articles";
+<script>
+    const API = "http://localhost:3000/api/articles";
+    window.onload = charger;
 
-        window.onload = charger;
+    async function charger() {
+        const res  = await fetch(API);
+        const data = await res.json();
+        afficher(data.data);
+        updateCount(data.count);
+        buildFilters(data.data);
+    }
 
-        async function charger() {
-            const res = await fetch(API);
-            const data = await res.json();
-            afficher(data.data);
-            updateCount(data.count);
-            buildFilters(data.data);
+    async function publier() {
+        const id = document.getElementById('articleId').value;
+        const payload = {
+            titre:    document.getElementById('titre').value.trim(),
+            auteur:   document.getElementById('auteur').value.trim(),
+            contenu:  document.getElementById('contenu').value.trim(),
+            categorie:document.getElementById('cat').value.trim(),
+            tags:     document.getElementById('tags').value.trim()
+        };
+
+        if (!payload.titre || !payload.auteur || !payload.contenu) {
+            toast('Titre, auteur et contenu sont obligatoires !', 'err'); return;
         }
 
-        async function publier() {
-            const id = document.getElementById('articleId').value;
-            const payload = {
-                titre: document.getElementById('titre').value.trim(),
-                auteur: document.getElementById('auteur').value.trim(),
-                contenu: document.getElementById('contenu').value.trim(),
-                categorie: document.getElementById('cat').value.trim(),
-                tags: document.getElementById('tags').value.trim()
-            };
+        const res = await fetch(id ? `${API}/${id}` : API, {
+            method: id ? 'PUT' : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
 
-            if (!payload.titre || !payload.auteur || !payload.contenu) {
-                toast('Le titre, l\'auteur et le contenu sont obligatoires !', 'error');
-                return;
-            }
-
-            const url = id ? `${API}/${id}` : API;
-            const method = id ? 'PUT' : 'POST';
-
-            const res = await fetch(url, {
-                method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (res.ok) {
-                toast(id ? 'Article modifié avec succès !' : 'Article publié avec succès !', 'success');
-                annuler();
-                charger();
-            } else {
-                toast('Une erreur est survenue.', 'error');
-            }
+        if (res.ok) {
+            toast(id ? 'Article modifié !' : 'Article publié !', 'ok');
+            annuler(); charger();
+        } else {
+            toast('Une erreur est survenue.', 'err');
         }
+    }
 
-        async function modifier(id) {
-            const res = await fetch(`${API}/${id}`);
-            const data = await res.json();
-            const a = data.data;
+    async function modifier(id) {
+        const res  = await fetch(`${API}/${id}`);
+        const data = await res.json();
+        const a    = data.data;
 
-            document.getElementById('articleId').value = a.id;
-            document.getElementById('titre').value = a.titre;
-            document.getElementById('auteur').value = a.auteur;
-            document.getElementById('cat').value = a.categorie || '';
-            document.getElementById('tags').value = a.tags || '';
-            document.getElementById('contenu').value = a.contenu;
-            document.getElementById('formTitle').textContent = 'Modifier l\'article';
-            document.getElementById('formBadge').textContent = 'Édition';
-            document.getElementById('formBadge').className = 'form-mode-badge edit';
-            document.getElementById('submitLabel').textContent = 'Enregistrer';
-            document.getElementById('cancelBtn').style.display = 'block';
+        document.getElementById('articleId').value   = a.id;
+        document.getElementById('titre').value       = a.titre;
+        document.getElementById('auteur').value      = a.auteur;
+        document.getElementById('cat').value         = a.categorie || '';
+        document.getElementById('tags').value        = a.tags || '';
+        document.getElementById('contenu').value     = a.contenu;
+        document.getElementById('formTitle').textContent   = 'Modifier';
+        document.getElementById('formBadge').textContent   = 'Édition';
+        document.getElementById('formBadge').className     = 'mode-tag edit';
+        document.getElementById('submitLabel').textContent = 'Enregistrer';
+        document.getElementById('cancelBtn').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    function annuler() {
+        document.getElementById('articleId').value = '';
+        document.querySelectorAll('.form-body input:not([type=hidden]), .form-body textarea').forEach(i => i.value = '');
+        document.getElementById('formTitle').textContent   = 'Nouvel Article';
+        document.getElementById('formBadge').textContent   = 'Création';
+        document.getElementById('formBadge').className     = 'mode-tag';
+        document.getElementById('submitLabel').textContent = 'Publier l\'article';
+        document.getElementById('cancelBtn').style.display = 'none';
+    }
 
-        function annuler() {
-            document.getElementById('articleId').value = '';
-            document.querySelectorAll('.form-body input:not([type=hidden]), .form-body textarea').forEach(i => i.value = '');
-            document.getElementById('formTitle').textContent = 'Nouvel Article';
-            document.getElementById('formBadge').textContent = 'Création';
-            document.getElementById('formBadge').className = 'form-mode-badge';
-            document.getElementById('submitLabel').textContent = 'Publier l\'article';
-            document.getElementById('cancelBtn').style.display = 'none';
-        }
+    async function supprimer(id) {
+        if (!confirm('Supprimer cet article ?')) return;
+        const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+        if (res.ok) { toast('Article supprimé.', 'ok'); charger(); }
+    }
 
-        async function supprimer(id) {
-            if (confirm('Supprimer cet article définitivement ?')) {
-                const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
-                if (res.ok) {
-                    toast('Article supprimé.', 'success');
-                    charger();
-                }
-            }
-        }
+    async function recherche() {
+        const q = document.getElementById('searchBox').value.trim();
+        if (!q) { charger(); return; }
+        const res  = await fetch(`${API}/search?query=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        afficher(data.data);
+        updateCount(data.count);
+    }
 
-        async function recherche() {
-            const q = document.getElementById('searchBox').value.trim();
-            if (!q) { charger(); return; }
-            const res = await fetch(`${API}/search?query=${encodeURIComponent(q)}`);
-            const data = await res.json();
-            afficher(data.data);
-            updateCount(data.count);
-        }
+    function buildFilters(articles) {
+        if (!articles) return;
+        const cats = [...new Set(articles.map(a => a.categorie).filter(Boolean))];
+        document.getElementById('filterBar').innerHTML =
+            cats.map(c => `<button class="filter-btn" onclick="filterCat('${c}',this)">${c}</button>`).join('');
+    }
 
-        function buildFilters(articles) {
-            if (!articles) return;
-            const cats = [...new Set(articles.map(a => a.categorie).filter(Boolean))];
-            const bar = document.getElementById('filterBar');
-            bar.innerHTML = cats.map(c => `<button class="filter-btn" onclick="filterCat('${c}', this)">${c}</button>`).join('');
-        }
+    async function filterCat(cat, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const res  = await fetch(`${API}?categorie=${encodeURIComponent(cat)}`);
+        const data = await res.json();
+        afficher(data.data);
+        updateCount(data.count);
+    }
 
-        async function filterCat(cat, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const res = await fetch(`${API}?categorie=${encodeURIComponent(cat)}`);
-            const data = await res.json();
-            afficher(data.data);
-            updateCount(data.count);
-        }
+    function updateCount(n) {
+        document.getElementById('countBadge').textContent = `${n || 0} article${n > 1 ? 's' : ''}`;
+    }
 
-        function updateCount(n) {
-            const el = document.getElementById('countBadge');
-            el.textContent = `${n || 0} article${n > 1 ? 's' : ''}`;
-        }
-
-        function afficher(articles) {
-            const container = document.getElementById('articlesList');
-            if (!articles || articles.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-icon">
-                            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                        </div>
-                        <h3>Aucun article trouvé</h3>
-                        <p>Commencez par créer votre premier article.</p>
-                    </div>`;
-                return;
-            }
-
-            container.innerHTML = articles.map((a, i) => {
-                const initials = a.auteur ? a.auteur.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase() : '?';
-                const date = a.date_creation ? new Date(a.date_creation).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
-                const tagsHTML = a.tags ? a.tags.split(',').filter(t => t.trim()).map(t => `<span class="tag-chip">#${t.trim()}</span>`).join('') : '';
-
-                return `
-                <div class="article-card" style="animation-delay:${i * 0.05}s">
-                    <div class="card-top">
-                        <span class="cat-badge">${a.categorie || 'General'}</span>
-                        <div class="card-actions">
-                            <button class="action-btn edit" onclick="modifier(${a.id})" title="Modifier">
-                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                </svg>
-                            </button>
-                            <button class="action-btn delete" onclick="supprimer(${a.id})" title="Supprimer">
-                                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                </svg>
-                            </button>
-                        </div>
+    function afficher(articles) {
+        const c = document.getElementById('articlesList');
+        if (!articles || !articles.length) {
+            c.innerHTML = `
+                <div class="empty">
+                    <div class="empty-icon">
+                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
                     </div>
-                    <div class="card-body">
-                        <h3 class="card-title">${a.titre}</h3>
-                        <p class="card-excerpt">${a.contenu}</p>
-                    </div>
-                    ${tagsHTML ? `<div class="tags-row">${tagsHTML}</div>` : ''}
-                    <div class="card-footer">
-                        <div class="card-author">
-                            <div class="author-avatar">${initials}</div>
-                            <span class="author-name">${a.auteur}</span>
-                        </div>
-                        <span class="card-date">${date}</span>
-                    </div>
+                    <h3>Aucun article</h3>
+                    <p>Commencez par créer votre premier article.</p>
                 </div>`;
-            }).join('');
+            return;
         }
 
-        function toast(msg, type) {
-            const el = document.getElementById('toast');
-            el.textContent = msg;
-            el.className = type;
-            setTimeout(() => el.className = '', 3000);
-        }
-    </script>
+        c.innerHTML = articles.map((a, i) => {
+            const initials = a.auteur ? a.auteur.split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase() : '?';
+            const date     = a.date_creation ? new Date(a.date_creation).toLocaleDateString('fr-FR', { day:'numeric', month:'short', year:'numeric' }) : '';
+            const tagsHTML = a.tags ? a.tags.split(',').filter(t => t.trim()).map(t => `<span class="tag">#${t.trim()}</span>`).join('') : '';
+
+            return `
+            <div class="card" style="animation-delay:${i*0.05}s">
+                <div class="card-head">
+                    <span class="cat">${a.categorie || 'General'}</span>
+                    <div class="card-btns">
+                        <button class="icon-btn edit" onclick="modifier(${a.id})" title="Modifier">
+                            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                            </svg>
+                        </button>
+                        <button class="icon-btn del" onclick="supprimer(${a.id})" title="Supprimer">
+                            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">${a.titre}</h3>
+                    <p class="card-text">${a.contenu}</p>
+                </div>
+                ${tagsHTML ? `<div class="card-tags">${tagsHTML}</div>` : ''}
+                <div class="card-foot">
+                    <div class="author">
+                        <div class="avatar">${initials}</div>
+                        <span class="author-name">${a.auteur}</span>
+                    </div>
+                    <span class="date">${date}</span>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function toast(msg, type) {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.className = type;
+        setTimeout(() => el.className = '', 3000);
+    }
+</script>
 </body>
 </html>
