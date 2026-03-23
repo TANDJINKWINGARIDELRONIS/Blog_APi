@@ -4,576 +4,228 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlogSphere — INF222</title>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --blue: #1a56db;
-            --blue-dark: #0a2540;
-            --blue-light: #eff6ff;
-            --white: #ffffff;
-            --bg: #f4f7fb;
-            --border: #dde5f0;
-            --text-muted: #6b7a99;
-            --success: #10b981;
-            --danger: #ef4444;
-            --radius: 14px;
-            --shadow: 0 2px 12px rgba(10,37,64,0.08);
-            --shadow-hover: 0 8px 28px rgba(10,37,64,0.13);
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Sora', sans-serif;
-            background: var(--bg);
-            color: var(--blue-dark);
-        }
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #0f172a; }
 
-        /* ── NAVBAR ── */
+        /* NAV */
         nav {
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            height: 60px;
-            padding: 0 32px;
+            background: #1a56db;
+            padding: 0 24px;
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            box-shadow: var(--shadow);
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--blue-dark);
-        }
+        nav h1 { color: white; font-size: 1.1rem; font-weight: 700; }
 
-        .brand-dot {
-            width: 10px; height: 10px;
-            background: var(--blue);
-            border-radius: 50%;
-        }
-
-        .brand span { color: var(--blue); }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg);
-            border: 1.5px solid var(--border);
-            border-radius: 50px;
-            padding: 7px 16px;
-            transition: 0.2s;
-        }
-
-        .search-box:focus-within {
-            border-color: var(--blue);
-            background: var(--white);
-        }
-
-        .search-box svg { color: var(--text-muted); flex-shrink: 0; }
-
-        .search-box input {
+        nav input {
+            padding: 7px 14px;
+            border-radius: 8px;
             border: none;
             outline: none;
-            background: transparent;
-            font-family: 'Sora', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
-            color: var(--blue-dark);
             width: 220px;
         }
 
-        .pill {
-            background: var(--blue-light);
-            color: var(--blue);
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 5px 14px;
-            border-radius: 50px;
-        }
-
-        /* ── HERO ── */
-        .hero {
-            background: linear-gradient(120deg, var(--blue-dark) 0%, #1e4080 50%, var(--blue) 100%);
-            padding: 48px 32px;
-            color: white;
-        }
-
-        .hero-inner {
+        /* LAYOUT */
+        .page {
             max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .hero-label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.55);
-            margin-bottom: 12px;
-        }
-
-        .hero h1 {
-            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 8px;
-        }
-
-        .hero h1 span { color: #93c5fd; }
-
-        .hero p {
-            font-size: 0.95rem;
-            font-weight: 300;
-            color: rgba(255,255,255,0.6);
-        }
-
-        /* ── LAYOUT ── */
-        .layout {
-            max-width: 1100px;
-            margin: 36px auto;
-            padding: 0 32px;
+            margin: 28px auto;
+            padding: 0 20px;
             display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 28px;
+            grid-template-columns: 300px 1fr;
+            gap: 24px;
             align-items: start;
         }
 
-        /* ── FORM ── */
+        /* FORMULAIRE */
         .form-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
             position: sticky;
-            top: 76px;
-            overflow: hidden;
+            top: 72px;
         }
 
-        .form-top {
-            padding: 20px 22px 16px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .form-card h2 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
 
-        .form-top h2 {
-            font-size: 1rem;
-            font-weight: 700;
-        }
-
-        .mode-tag {
-            font-size: 0.68rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 3px 10px;
-            border-radius: 50px;
-            background: var(--blue-light);
-            color: var(--blue);
-        }
-
-        .mode-tag.edit { background: #fef9c3; color: #ca8a04; }
-
-        .form-body { padding: 18px 22px; }
-
-        .field { margin-bottom: 14px; }
-
-        .field label {
-            display: block;
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-        }
-
-        .field input,
-        .field textarea {
+        .form-card input,
+        .form-card textarea {
             width: 100%;
-            padding: 10px 12px;
-            border: 1.5px solid var(--border);
+            padding: 9px 12px;
+            border: 1.5px solid #e2e8f0;
             border-radius: 8px;
-            font-family: 'Sora', sans-serif;
-            font-size: 0.875rem;
-            color: var(--blue-dark);
-            background: var(--bg);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
             outline: none;
-            transition: 0.2s;
+            margin-bottom: 10px;
+            background: #f8fafc;
             resize: none;
         }
 
-        .field input:focus,
-        .field textarea:focus {
-            border-color: var(--blue);
-            background: var(--white);
-        }
+        .form-card input:focus,
+        .form-card textarea:focus { border-color: #1a56db; background: white; }
 
-        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-        .btn {
+        .btn-pub {
             width: 100%;
-            padding: 11px;
+            padding: 10px;
+            background: #1a56db;
+            color: white;
             border: none;
             border-radius: 8px;
-            font-family: 'Sora', sans-serif;
-            font-size: 0.875rem;
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
+            font-size: 0.875rem;
             cursor: pointer;
-            transition: 0.2s;
         }
 
-        .btn-blue {
-            background: var(--blue);
-            color: white;
-            margin-top: 4px;
-        }
+        .btn-pub:hover { background: #1440b8; }
 
-        .btn-blue:hover { background: #1440b8; transform: translateY(-1px); }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--text-muted);
-            border: 1.5px solid var(--border);
+        .btn-cancel {
+            width: 100%;
+            padding: 9px;
+            background: white;
+            color: #64748b;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
             margin-top: 8px;
             display: none;
         }
 
-        .btn-ghost:hover { border-color: var(--danger); color: var(--danger); }
-
-        /* ── ARTICLES ── */
-        .articles-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-        }
-
-        .articles-head h2 {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .filters { display: flex; gap: 6px; flex-wrap: wrap; }
-
-        .filter-btn {
-            padding: 5px 14px;
-            border-radius: 50px;
-            font-family: 'Sora', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: 1.5px solid var(--border);
-            background: var(--white);
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--blue);
-            border-color: var(--blue);
-            color: white;
-        }
+        /* ARTICLES */
+        .articles h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
         }
 
-        /* ── CARD ── */
+        /* CARTE */
         .card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 16px;
             display: flex;
             flex-direction: column;
-            transition: 0.25s;
-            animation: up 0.35s ease both;
-            overflow: hidden;
+            gap: 8px;
+            transition: 0.2s;
         }
 
-        @keyframes up {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+        .card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
 
-        .card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-3px);
-            border-color: #bfcfee;
-        }
-
-        .card-head {
-            padding: 16px 16px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .card-top { display: flex; justify-content: space-between; align-items: center; }
 
         .cat {
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.07em;
+            letter-spacing: 0.06em;
+            background: #eff6ff;
+            color: #1a56db;
             padding: 3px 10px;
             border-radius: 50px;
-            background: var(--blue-light);
-            color: var(--blue);
         }
 
-        .card-btns {
-            display: flex;
-            gap: 5px;
-            opacity: 0;
-            transition: 0.2s;
-        }
+        .card-btns { display: flex; gap: 6px; }
 
-        .card:hover .card-btns { opacity: 1; }
-
-        .icon-btn {
-            width: 28px; height: 28px;
-            border-radius: 7px;
-            border: 1.5px solid var(--border);
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .card-btns button {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 600;
             cursor: pointer;
-            color: var(--text-muted);
-            transition: 0.2s;
+            border: 1.5px solid #e2e8f0;
+            background: white;
+            color: #64748b;
         }
 
-        .icon-btn.edit:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
-        .icon-btn.del:hover  { border-color: var(--danger); color: var(--danger); background: #fef2f2; }
+        .card-btns .edit:hover  { border-color: #1a56db; color: #1a56db; }
+        .card-btns .del:hover   { border-color: #ef4444; color: #ef4444; }
 
-        .card-body { padding: 12px 16px; flex: 1; }
+        .card h3 { font-size: 0.95rem; font-weight: 700; line-height: 1.4; }
 
-        .card-title {
-            font-size: 1rem;
-            font-weight: 700;
-            line-height: 1.4;
-            margin-bottom: 6px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .card-text {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            font-weight: 300;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .card-tags {
-            padding: 0 16px 12px;
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            font-size: 0.65rem;
-            background: var(--bg);
-            color: var(--text-muted);
-            padding: 2px 8px;
-            border-radius: 50px;
-            border: 1px solid var(--border);
-        }
+        .card p  { font-size: 0.82rem; color: #64748b; line-height: 1.5;
+                   display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
         .card-foot {
-            padding: 12px 16px;
-            border-top: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding-top: 8px;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.75rem;
+            color: #64748b;
         }
 
-        .author {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
+        .card-foot span:first-child { font-weight: 600; color: #0f172a; }
 
-        .avatar {
-            width: 26px; height: 26px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--blue), #60a5fa);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: white;
-        }
+        /* EMPTY */
+        .empty { text-align: center; padding: 48px; color: #94a3b8; }
+        .empty p { margin-top: 8px; font-size: 0.85rem; }
 
-        .author-name { font-size: 0.78rem; font-weight: 600; }
-        .date { font-size: 0.72rem; color: var(--text-muted); }
-
-        /* ── EMPTY ── */
-        .empty {
-            grid-column: 1/-1;
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-muted);
-        }
-
-        .empty-icon {
-            width: 56px; height: 56px;
-            background: var(--blue-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 14px;
-            color: var(--blue);
-        }
-
-        .empty h3 { font-size: 1rem; color: var(--blue-dark); margin-bottom: 4px; }
-        .empty p  { font-size: 0.85rem; font-weight: 300; }
-
-        /* ── TOAST ── */
+        /* TOAST */
         #toast {
             position: fixed;
-            bottom: 24px; right: 24px;
+            bottom: 20px; right: 20px;
             padding: 12px 18px;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 600;
             color: white;
             z-index: 999;
             display: none;
-            animation: slideIn 0.3s ease;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(16px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
+        #toast.ok  { background: #10b981; display: block; }
+        #toast.err { background: #ef4444; display: block; }
 
-        #toast.ok  { background: var(--success); display: block; }
-        #toast.err { background: var(--danger);  display: block; }
-
-        /* ── LOADER ── */
-        .loader { grid-column: 1/-1; display: flex; justify-content: center; padding: 48px; }
-        .spin {
-            width: 32px; height: 32px;
-            border: 3px solid var(--border);
-            border-top-color: var(--blue);
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        @media (max-width: 860px) {
-            .layout { grid-template-columns: 1fr; padding: 0 16px; margin: 20px auto; }
+        @media (max-width: 768px) {
+            .page { grid-template-columns: 1fr; }
             .form-card { position: static; }
-            nav { padding: 0 16px; }
-            .search-box input { width: 150px; }
-            .hero { padding: 36px 16px; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="brand">
-        <div class="brand-dot"></div>
-        Blog<span>Sphere</span>
-    </div>
-    <div class="nav-right">
-        <div class="search-box">
-            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
-            <input type="text" id="searchBox" placeholder="Rechercher..." oninput="recherche()">
-        </div>
-        <span class="pill" id="countBadge">0 article</span>
-    </div>
+    <h1>📝 BlogSphere</h1>
+    <input type="text" id="searchBox" placeholder="Rechercher..." oninput="recherche()">
 </nav>
 
-<div class="hero">
-    <div class="hero-inner">
-        <p class="hero-label">INF222 · EC1 · Projet Backend</p>
-        <h1>Gérez vos articles<br><span>avec simplicité.</span></h1>
-        <p>Créez, modifiez et organisez vos publications en temps réel.</p>
-    </div>
-</div>
-
-<div class="layout">
+<div class="page">
 
     <!-- FORMULAIRE -->
     <div class="form-card">
-        <div class="form-top">
-            <h2 id="formTitle">Nouvel Article</h2>
-            <span class="mode-tag" id="formBadge">Création</span>
+        <h2 id="formTitle">Nouvel article</h2>
+        <input type="hidden" id="articleId">
+        <input type="text" id="titre" placeholder="Titre *">
+        <input type="text" id="auteur" placeholder="Auteur *">
+        <div class="row">
+            <input type="text" id="cat" placeholder="Catégorie">
+            <input type="text" id="tags" placeholder="Tags">
         </div>
-        <div class="form-body">
-            <input type="hidden" id="articleId">
-
-            <div class="field">
-                <label>Titre *</label>
-                <input type="text" id="titre" placeholder="Un titre accrocheur...">
-            </div>
-
-            <div class="field">
-                <label>Auteur *</label>
-                <input type="text" id="auteur" placeholder="Votre nom">
-            </div>
-
-            <div class="two-col">
-                <div class="field">
-                    <label>Catégorie</label>
-                    <input type="text" id="cat" placeholder="ex: Tech">
-                </div>
-                <div class="field">
-                    <label>Tags</label>
-                    <input type="text" id="tags" placeholder="node,api">
-                </div>
-            </div>
-
-            <div class="field">
-                <label>Contenu *</label>
-                <textarea id="contenu" rows="5" placeholder="Rédigez votre article..."></textarea>
-            </div>
-
-            <button class="btn btn-blue" onclick="publier()">
-                <span id="submitLabel">Publier l'article</span>
-            </button>
-            <button class="btn btn-ghost" onclick="annuler()" id="cancelBtn">Annuler</button>
-        </div>
+        <textarea id="contenu" rows="5" placeholder="Contenu *"></textarea>
+        <button class="btn-pub" onclick="publier()" id="submitBtn">Publier</button>
+        <button class="btn-cancel" onclick="annuler()" id="cancelBtn">Annuler</button>
     </div>
 
     <!-- ARTICLES -->
-    <div>
-        <div class="articles-head">
-            <h2>Publications</h2>
-            <div class="filters" id="filterBar"></div>
-        </div>
-        <div class="grid" id="articlesList">
-            <div class="loader"><div class="spin"></div></div>
-        </div>
+    <div class="articles">
+        <h2>Publications <span id="countBadge" style="font-weight:400;color:#64748b;font-size:0.9rem"></span></h2>
+        <div class="grid" id="articlesList"></div>
     </div>
 </div>
 
@@ -584,154 +236,87 @@
     window.onload = charger;
 
     async function charger() {
-        const res  = await fetch(API);
-        const data = await res.json();
+        const data = await (await fetch(API)).json();
         afficher(data.data);
-        updateCount(data.count);
-        buildFilters(data.data);
+        document.getElementById('countBadge').textContent = `(${data.count || 0})`;
     }
 
     async function publier() {
         const id = document.getElementById('articleId').value;
-        const payload = {
-            titre:    document.getElementById('titre').value.trim(),
-            auteur:   document.getElementById('auteur').value.trim(),
-            contenu:  document.getElementById('contenu').value.trim(),
-            categorie:document.getElementById('cat').value.trim(),
-            tags:     document.getElementById('tags').value.trim()
+        const body = {
+            titre:     document.getElementById('titre').value.trim(),
+            auteur:    document.getElementById('auteur').value.trim(),
+            contenu:   document.getElementById('contenu').value.trim(),
+            categorie: document.getElementById('cat').value.trim(),
+            tags:      document.getElementById('tags').value.trim()
         };
-
-        if (!payload.titre || !payload.auteur || !payload.contenu) {
-            toast('Titre, auteur et contenu sont obligatoires !', 'err'); return;
-        }
+        if (!body.titre || !body.auteur || !body.contenu) { toast('Titre, auteur et contenu requis !', 'err'); return; }
 
         const res = await fetch(id ? `${API}/${id}` : API, {
             method: id ? 'PUT' : 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            body: JSON.stringify(body)
         });
 
-        if (res.ok) {
-            toast(id ? 'Article modifié !' : 'Article publié !', 'ok');
-            annuler(); charger();
-        } else {
-            toast('Une erreur est survenue.', 'err');
-        }
+        if (res.ok) { toast(id ? 'Modifié !' : 'Publié !', 'ok'); annuler(); charger(); }
+        else toast('Erreur.', 'err');
     }
 
     async function modifier(id) {
-        const res  = await fetch(`${API}/${id}`);
-        const data = await res.json();
-        const a    = data.data;
-
-        document.getElementById('articleId').value   = a.id;
-        document.getElementById('titre').value       = a.titre;
-        document.getElementById('auteur').value      = a.auteur;
-        document.getElementById('cat').value         = a.categorie || '';
-        document.getElementById('tags').value        = a.tags || '';
-        document.getElementById('contenu').value     = a.contenu;
+        const { data: a } = await (await fetch(`${API}/${id}`)).json();
+        document.getElementById('articleId').value = a.id;
+        document.getElementById('titre').value     = a.titre;
+        document.getElementById('auteur').value    = a.auteur;
+        document.getElementById('cat').value       = a.categorie || '';
+        document.getElementById('tags').value      = a.tags || '';
+        document.getElementById('contenu').value   = a.contenu;
         document.getElementById('formTitle').textContent   = 'Modifier';
-        document.getElementById('formBadge').textContent   = 'Édition';
-        document.getElementById('formBadge').className     = 'mode-tag edit';
-        document.getElementById('submitLabel').textContent = 'Enregistrer';
+        document.getElementById('submitBtn').textContent   = 'Enregistrer';
         document.getElementById('cancelBtn').style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function annuler() {
-        document.getElementById('articleId').value = '';
-        document.querySelectorAll('.form-body input:not([type=hidden]), .form-body textarea').forEach(i => i.value = '');
-        document.getElementById('formTitle').textContent   = 'Nouvel Article';
-        document.getElementById('formBadge').textContent   = 'Création';
-        document.getElementById('formBadge').className     = 'mode-tag';
-        document.getElementById('submitLabel').textContent = 'Publier l\'article';
+        ['articleId','titre','auteur','cat','tags','contenu'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('formTitle').textContent   = 'Nouvel article';
+        document.getElementById('submitBtn').textContent   = 'Publier';
         document.getElementById('cancelBtn').style.display = 'none';
     }
 
     async function supprimer(id) {
-        if (!confirm('Supprimer cet article ?')) return;
-        const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
-        if (res.ok) { toast('Article supprimé.', 'ok'); charger(); }
+        if (!confirm('Supprimer ?')) return;
+        if ((await fetch(`${API}/${id}`, { method: 'DELETE' })).ok) { toast('Supprimé.', 'ok'); charger(); }
     }
 
     async function recherche() {
         const q = document.getElementById('searchBox').value.trim();
         if (!q) { charger(); return; }
-        const res  = await fetch(`${API}/search?query=${encodeURIComponent(q)}`);
-        const data = await res.json();
+        const data = await (await fetch(`${API}/search?query=${encodeURIComponent(q)}`)).json();
         afficher(data.data);
-        updateCount(data.count);
-    }
-
-    function buildFilters(articles) {
-        if (!articles) return;
-        const cats = [...new Set(articles.map(a => a.categorie).filter(Boolean))];
-        document.getElementById('filterBar').innerHTML =
-            cats.map(c => `<button class="filter-btn" onclick="filterCat('${c}',this)">${c}</button>`).join('');
-    }
-
-    async function filterCat(cat, btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const res  = await fetch(`${API}?categorie=${encodeURIComponent(cat)}`);
-        const data = await res.json();
-        afficher(data.data);
-        updateCount(data.count);
-    }
-
-    function updateCount(n) {
-        document.getElementById('countBadge').textContent = `${n || 0} article${n > 1 ? 's' : ''}`;
     }
 
     function afficher(articles) {
         const c = document.getElementById('articlesList');
-        if (!articles || !articles.length) {
-            c.innerHTML = `
-                <div class="empty">
-                    <div class="empty-icon">
-                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                        </svg>
-                    </div>
-                    <h3>Aucun article</h3>
-                    <p>Commencez par créer votre premier article.</p>
-                </div>`;
+        if (!articles?.length) {
+            c.innerHTML = `<div class="empty"><h3>Aucun article</h3><p>Créez votre premier article.</p></div>`;
             return;
         }
-
-        c.innerHTML = articles.map((a, i) => {
-            const initials = a.auteur ? a.auteur.split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase() : '?';
-            const date     = a.date_creation ? new Date(a.date_creation).toLocaleDateString('fr-FR', { day:'numeric', month:'short', year:'numeric' }) : '';
-            const tagsHTML = a.tags ? a.tags.split(',').filter(t => t.trim()).map(t => `<span class="tag">#${t.trim()}</span>`).join('') : '';
-
+        c.innerHTML = articles.map(a => {
+            const date = a.date_creation ? new Date(a.date_creation).toLocaleDateString('fr-FR') : '';
             return `
-            <div class="card" style="animation-delay:${i*0.05}s">
-                <div class="card-head">
+            <div class="card">
+                <div class="card-top">
                     <span class="cat">${a.categorie || 'General'}</span>
                     <div class="card-btns">
-                        <button class="icon-btn edit" onclick="modifier(${a.id})" title="Modifier">
-                            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                            </svg>
-                        </button>
-                        <button class="icon-btn del" onclick="supprimer(${a.id})" title="Supprimer">
-                            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                            </svg>
-                        </button>
+                        <button class="edit" onclick="modifier(${a.id})">✏️ Modifier</button>
+                        <button class="del"  onclick="supprimer(${a.id})">🗑️ Sup.</button>
                     </div>
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title">${a.titre}</h3>
-                    <p class="card-text">${a.contenu}</p>
-                </div>
-                ${tagsHTML ? `<div class="card-tags">${tagsHTML}</div>` : ''}
+                <h3>${a.titre}</h3>
+                <p>${a.contenu}</p>
                 <div class="card-foot">
-                    <div class="author">
-                        <div class="avatar">${initials}</div>
-                        <span class="author-name">${a.auteur}</span>
-                    </div>
-                    <span class="date">${date}</span>
+                    <span>👤 ${a.auteur}</span>
+                    <span>${date}</span>
                 </div>
             </div>`;
         }).join('');
