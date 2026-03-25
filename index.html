@@ -202,6 +202,7 @@
 
 <nav>
     <h1>📝 BlogSphere — INF222</h1>
+    <a href="/api-docs" target="_blank" style="color:white;font-size:0.85rem;font-weight:600;text-decoration:none;background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:8px;">📖 API Docs</a>
     <input type="text" id="searchBox" placeholder="Rechercher..." oninput="recherche()">
 </nav>
 
@@ -328,6 +329,8 @@
         el.className = type;
         setTimeout(() => el.className = '', 3000);
     }
+    // Empêche Render de mettre le serveur en veille
+    setInterval(() => fetch('/api/articles'), 10 * 60 * 1000);
 </script>
 </body>
 </html>
