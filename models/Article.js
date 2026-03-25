@@ -45,27 +45,28 @@ const Article = {
 
     //Foction update pour modifier un article 
 
-    update : async (id,{titre, contenu, categorie, tags}) => {
-        const fields = [];
-        const params = [];
+    update : async (id, {titre, contenu, categorie, tags}) => {
+    const fields = [];
+    const params = [];
 
-        if (titre !== undefined)  {fields.push('titre = ?');  params.push(titre);}
-        if (contenu !== undefined)  {fields.push('contenu = ?');  params.push(contenu);}
-        if (categorie !== undefined)  {fields.push('categorie = ?');  params.push(categorie);}
-        if (tags !== undefined){
-            const tagsStr = Array.isArray(tags) ? tags.join(',') : tags;
-            fields.push('tags = ?')
-            params.push(tagsStr);
-        }
+    if (titre !== undefined)     { fields.push('titre = ?');     params.push(titre); }
+    if (contenu !== undefined)   { fields.push('contenu = ?');   params.push(contenu); }
+    if (categorie !== undefined) { fields.push('categorie = ?'); params.push(categorie); }
+    if (tags !== undefined) {
+        const tagsStr = Array.isArray(tags) ? tags.join(',') : tags;
+        fields.push('tags = ?');
+        params.push(tagsStr);
+    }
 
-        if (fields.length === 0) return false;
+    if (fields.length === 0) return false;
 
-        params.push(id)
-        const [result] = await db.execute(
-            'UPDATE article SET ${fields.join(', ')} WHERE id = ?', params
-        );
-        return result.affectedRows > 0;
-    },
+    params.push(id);
+    const [result] = await db.execute(
+        `UPDATE articles SET ${fields.join(', ')} WHERE id = ?`,
+        params
+    );
+    return result.affectedRows > 0;
+},
 
     //Fonction delete pour supprimer un article 
     delete: async (id) => {
